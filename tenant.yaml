@@ -1,31 +1,7 @@
-rules:
-  - name: Add department ID
-    script: ./rules/Add department ID.js
-    stage: login_success
-    enabled: false
-    order: 3
-  - name: Empty rule
-    script: ./rules/Empty rule.js
-    stage: login_success
-    enabled: false
-    order: 2
-  - name: Test
-    script: ./rules/Test.js
-    stage: login_success
-    enabled: false
-    order: 1
+rules: []
 rulesConfigs: []
-hooks:
-  - name: test
-    script: ./hooks/test.js
-    dependencies: {}
-    enabled: true
-    secrets: {}
-    triggerId: credentials-exchange
+hooks: []
 pages:
-  - name: guardian_multifactor
-    enabled: false
-    html: ./pages/guardian_multifactor.html
   - name: login
     enabled: false
     html: ./pages/login.html
@@ -33,115 +9,30 @@ pages:
     enabled: false
     html: ./pages/password_reset.html
 resourceServers:
-  - name: Test API
-    identifier: 'https://localhost:3000'
-    allow_offline_access: true
-    enforce_policies: true
-    scopes:
-      - value: 'create:tenants'
-        description: Create tenants
-      - value: 'read:users'
-        description: Read users
+  - name: test
+    identifier: 'https://test'
+    allow_offline_access: false
     signing_alg: RS256
     skip_consent_for_verifiable_first_party_clients: true
-    token_dialect: access_token
     token_lifetime: 86400
     token_lifetime_for_web: 7200
 clients:
   - name: API Explorer Application
-    allowed_clients: []
-    allowed_logout_urls:
-      - 'http://localhost:4200'
-      - 'https://tom-dev.au8.webtask.io'
     app_type: non_interactive
-    callbacks:
-      - 'http://localhost:4200/callback'
-      - 'https://tom-dev.au8.webtask.io/auth0-delegated-admin/login'
-    client_aliases: []
     cross_origin_auth: false
     custom_login_page_on: true
     grant_types:
-      - authorization_code
-      - implicit
-      - refresh_token
       - client_credentials
-      - password
-      - 'http://auth0.com/oauth/grant-type/password-realm'
-      - 'http://auth0.com/oauth/grant-type/mfa-oob'
-      - 'http://auth0.com/oauth/grant-type/mfa-otp'
-      - 'http://auth0.com/oauth/grant-type/mfa-recovery-code'
     is_first_party: true
     is_token_endpoint_ip_header_trusted: false
     jwt_configuration:
       alg: RS256
       lifetime_in_seconds: 36000
       secret_encoded: false
-    native_social_login:
-      apple:
-        enabled: false
-      facebook:
-        enabled: false
-    oidc_conformant: false
-    sso_disabled: false
-    token_endpoint_auth_method: client_secret_post
-    web_origins:
-      - 'http://localhost:4200'
-      - 'https://tom-dev.au8.webtask.io'
-  - name: Auth0 Management API (Test Client)
-    allowed_clients: []
-    allowed_logout_urls: []
-    allowed_origins: []
-    app_type: native
-    callbacks: []
-    cross_origin_auth: false
-    custom_login_page_on: true
-    description: Test client for Auth0 Management API.
-    grant_types:
-      - authorization_code
-      - implicit
-      - refresh_token
-      - client_credentials
-    is_first_party: true
-    is_token_endpoint_ip_header_trusted: false
-    jwt_configuration:
-      lifetime_in_seconds: 36000
-      secret_encoded: false
-    logo_uri: ''
     oidc_conformant: true
-    sso: true
     sso_disabled: false
-    token_endpoint_auth_method: client_secret_post
-    web_origins: []
-  - name: Auth0 Management API (Test Client) 2
-    allowed_clients: []
-    allowed_logout_urls: []
-    allowed_origins: []
-    app_type: native
-    callbacks: []
-    cross_origin_auth: false
-    custom_login_page_on: true
-    description: Test client for Auth0 Management API.
-    grant_types:
-      - authorization_code
-      - implicit
-      - refresh_token
-      - client_credentials
-    is_first_party: true
-    is_token_endpoint_ip_header_trusted: false
-    jwt_configuration:
-      lifetime_in_seconds: 36000
-      secret_encoded: false
-    logo_uri: ''
-    oidc_conformant: true
-    sso: true
-    sso_disabled: false
-    token_endpoint_auth_method: client_secret_post
-    web_origins: []
   - name: Default App
-    allowed_clients: []
-    callbacks:
-      - 'http://localhost:3000'
-    client_aliases: []
+    callbacks: []
     cross_origin_auth: false
     custom_login_page_on: true
     grant_types:
@@ -149,172 +40,48 @@ clients:
       - implicit
       - refresh_token
       - client_credentials
-    initiate_login_uri: 'https://test.com'
     is_first_party: true
     is_token_endpoint_ip_header_trusted: false
     jwt_configuration:
       alg: RS256
       lifetime_in_seconds: 36000
       secret_encoded: false
-    native_social_login:
-      apple:
-        enabled: false
     oidc_conformant: true
     sso_disabled: false
-    token_endpoint_auth_method: none
-  - name: Test API (Test Application)
-    allowed_clients: []
-    allowed_logout_urls:
-      - 'http://exampleapi.com'
-    allowed_origins:
-      - 'http://exampleapi.com'
-    app_type: non_interactive
-    callbacks:
-      - 'http://localhost:3000/callback'
-    client_aliases: []
-    cross_origin_auth: false
-    custom_login_page_on: true
-    grant_types:
-      - authorization_code
-      - implicit
-      - refresh_token
-      - client_credentials
-      - password
-      - 'http://auth0.com/oauth/grant-type/password-realm'
-      - 'http://auth0.com/oauth/grant-type/mfa-oob'
-      - 'http://auth0.com/oauth/grant-type/mfa-otp'
-      - 'http://auth0.com/oauth/grant-type/mfa-recovery-code'
-    is_first_party: true
-    is_token_endpoint_ip_header_trusted: false
-    jwt_configuration:
-      alg: RS256
-      lifetime_in_seconds: 36000
-      secret_encoded: false
-    native_social_login:
-      apple:
-        enabled: false
-    oidc_conformant: false
-    sso_disabled: false
-    token_endpoint_auth_method: client_secret_post
-    web_origins:
-      - 'http://exampleapi.com'
   - name: Test App - SPA
-    allowed_clients: []
-    allowed_logout_urls:
-      - 'http://localhost:4200'
-      - 'http://localhost:3000'
     app_type: spa
-    callbacks:
-      - 'http://localhost:4200/callback'
-      - 'https://localhost:4200/callback'
-      - 'file:///callback'
-      - 'http://localhost:4200'
-      - 'file:///#/callback'
-      - 'file://#/callback'
-      - 'https://tom-dev.au.auth0.com/login'
-      - 'https://tom-auth0-test.s3.amazonaws.com/callback'
-      - 'http://google.com/callback'
-      - 'http://tom.docksal/callback'
-      - 'http://auth0-gumballs.s3-website.us-east-2.amazonaws.com/callback'
-      - 'http://localhost:3000'
-      - 'http://localhost:3000/callback'
-      - 'http://localhost:4200/index.html'
-    client_aliases: []
     cross_origin_auth: false
     custom_login_page_on: true
     grant_types:
       - authorization_code
       - implicit
       - refresh_token
-      - 'http://auth0.com/oauth/grant-type/mfa-oob'
-      - 'http://auth0.com/oauth/grant-type/mfa-otp'
-      - 'http://auth0.com/oauth/grant-type/mfa-recovery-code'
-    initiate_login_uri: 'https://test.com'
-    is_first_party: true
-    is_token_endpoint_ip_header_trusted: false
-    jwt_configuration:
-      alg: RS256
-      lifetime_in_seconds: 30
-      secret_encoded: false
-    native_social_login:
-      apple:
-        enabled: false
-      facebook:
-        enabled: false
-    oidc_conformant: false
-    sso_disabled: false
-    token_endpoint_auth_method: none
-    web_origins:
-      - 'http://localhost:4200'
-      - 'https://tom-auth0-test.s3.amazonaws.com'
-      - 'http://google.com'
-      - 'http://auth0-gumballs.s3-website.us-east-2.amazonaws.com'
-      - 'http://localhost:3000'
-      - 'https://tom-dev.au.auth0.com'
-  - name: Test App - SPA (cloned)
-    allowed_clients: []
-    allowed_logout_urls:
-      - 'http://localhost:4200'
-      - 'http://localhost:3000'
-    app_type: spa
-    callbacks:
-      - 'http://localhost:4200/callback'
-      - 'file:///callback'
-      - 'http://localhost:4200'
-      - 'file:///#/callback'
-      - 'file://#/callback'
-      - 'https://tom-dev.au.auth0.com/login'
-      - 'https://tom-auth0-test.s3.amazonaws.com/callback'
-      - 'http://google.com/callback'
-      - 'http://tom.docksal/callback'
-      - 'http://auth0-gumballs.s3-website.us-east-2.amazonaws.com/callback'
-      - 'http://localhost:3000/callback'
-      - 'http://localhost:3000'
-    client_aliases: []
-    cross_origin_auth: false
-    custom_login_page_on: true
-    grant_types:
-      - authorization_code
-      - implicit
-      - refresh_token
-      - 'http://auth0.com/oauth/grant-type/mfa-oob'
-      - 'http://auth0.com/oauth/grant-type/mfa-otp'
-      - 'http://auth0.com/oauth/grant-type/mfa-recovery-code'
     is_first_party: true
     is_token_endpoint_ip_header_trusted: false
     jwt_configuration:
       alg: RS256
       lifetime_in_seconds: 36000
       secret_encoded: false
-    native_social_login:
-      apple:
-        enabled: false
-      facebook:
-        enabled: false
     oidc_conformant: true
     sso_disabled: false
     token_endpoint_auth_method: none
-    web_origins:
-      - 'http://localhost:4200'
-      - 'https://tom-auth0-test.s3.amazonaws.com'
-      - 'http://google.com'
-      - 'http://auth0-gumballs.s3-website.us-east-2.amazonaws.com'
-      - 'http://localhost:3000'
-  - name: Test App - Web
+  - name: test (Test Application)
     allowed_clients: []
-    app_type: regular_web
-    callbacks:
-      - 'http://localhost:4200/callback'
+    app_type: non_interactive
+    callbacks: []
     client_aliases: []
     cross_origin_auth: false
     custom_login_page_on: true
     grant_types:
-      - authorization_code
-      - implicit
-      - refresh_token
       - client_credentials
       - password
       - 'http://auth0.com/oauth/grant-type/password-realm'
+      - implicit
+      - authorization_code
+      - 'http://auth0.com/oauth/grant-type/mfa-oob'
+      - 'http://auth0.com/oauth/grant-type/mfa-otp'
+      - 'http://auth0.com/oauth/grant-type/mfa-recovery-code'
+      - refresh_token
     is_first_party: true
     is_token_endpoint_ip_header_trusted: false
     jwt_configuration:
@@ -329,283 +96,32 @@ clients:
     oidc_conformant: true
     sso_disabled: false
     token_endpoint_auth_method: client_secret_post
-    web_origins:
-      - 'http://localhost:4200'
-  - name: auth0-delegated-admin
-    allowed_clients: []
-    allowed_logout_urls:
-      - 'https://tom-dev.au8.webtask.io/auth0-delegated-admin'
-    callbacks:
-      - 'https://tom-dev.au8.webtask.io/auth0-delegated-admin/login'
-      - 'http://localhost:4200/callback'
-    client_aliases: []
-    cross_origin_auth: false
-    custom_login_page_on: true
-    grant_types:
-      - authorization_code
-      - implicit
-      - refresh_token
-      - client_credentials
-    is_first_party: true
-    is_token_endpoint_ip_header_trusted: false
-    jwt_configuration:
-      alg: RS256
-      lifetime_in_seconds: 36000
-      secret_encoded: false
-    native_social_login:
-      apple:
-        enabled: false
-      facebook:
-        enabled: false
-    oidc_conformant: true
-    sso_disabled: false
-    token_endpoint_auth_method: none
-    web_origins:
-      - 'https://tom-dev.au8.webtask.io'
-  - name: auth0-deploy-cli-extension
-    cross_origin_auth: false
-    custom_login_page_on: true
-    grant_types:
-      - authorization_code
-      - implicit
-      - refresh_token
-      - client_credentials
-    is_first_party: true
-    is_token_endpoint_ip_header_trusted: false
-    jwt_configuration:
-      alg: RS256
-      lifetime_in_seconds: 36000
-      secret_encoded: false
-    oidc_conformant: true
-    sso_disabled: false
-  - name: logs-to-cloudwatch
-    cross_origin_auth: false
-    custom_login_page_on: true
-    grant_types:
-      - authorization_code
-      - implicit
-      - refresh_token
-      - client_credentials
-    is_first_party: true
-    is_token_endpoint_ip_header_trusted: false
-    jwt_configuration:
-      alg: RS256
-      lifetime_in_seconds: 36000
-      secret_encoded: false
-    oidc_conformant: true
-    sso_disabled: false
 databases:
-  - name: Helpdesk
-    strategy: auth0
-    enabled_clients:
-      - auth0-delegated-admin
-      - auth0-deploy-cli-extension
-      - Auth0 Management API (Test Client)
-      - logs-to-cloudwatch
-      - Auth0 Management API (Test Client) 2
-    is_domain_connection: false
-    options:
-      mfa:
-        active: true
-        return_enroll_settings: true
-      passwordPolicy: good
-      disable_signup: true
-      requires_username: false
-      validation:
-        username:
-          min: 1
-          max: 15
-      strategy_version: 2
-      brute_force_protection: true
-    realms:
-      - Helpdesk
   - name: Username-Password-Authentication
     strategy: auth0
     enabled_clients:
-      - Test API (Test Application)
-      - auth0-deploy-cli-extension
-      - Auth0 Management API (Test Client)
-      - Test App - Web
-      - Test App - SPA
-      - logs-to-cloudwatch
-      - Auth0 Management API (Test Client) 2
       - Default App
-      - Test App - SPA (cloned)
+      - test (Test Application)
       - API Explorer Application
-    is_domain_connection: false
-    options:
-      non_persistent_attrs:
-        - test
-      brute_force_protection: true
-    realms:
-      - Username-Password-Authentication
-  - name: test
-    strategy: auth0
-    enabled_clients:
-      - auth0-deploy-cli-extension
-      - Auth0 Management API (Test Client)
-      - logs-to-cloudwatch
-      - Auth0 Management API (Test Client) 2
-      - API Explorer Application
+      - Test App - SPA
     is_domain_connection: false
     options:
       mfa:
         active: true
         return_enroll_settings: true
       passwordPolicy: good
-      disable_signup: false
-      requires_username: true
-      validation:
-        username:
-          min: 1
-          max: 15
       strategy_version: 2
       brute_force_protection: true
     realms:
-      - test
+      - Username-Password-Authentication
 connections:
-  - name: AD-test-2
-    strategy: ad
-    enabled_clients: []
-    is_domain_connection: false
-    options:
-      certAuth: false
-      disable_cache: false
-      kerberos: false
-      ips: null
-      brute_force_protection: true
-      agentIP: 122.202.10.250
-      agentMode: true
-      agentVersion: 4.1.6
-      certs:
-        - >-
-          MIIDQjCCAioCCQD3kck/Q/YXvDANBgkqhkiG9w0BAQsFADBjMQswCQYDVQQGEwJaWjEOMAwGA1UECAwFQmxpc3MxDjAMBgNVBAcMBUxvY2FsMQ0wCwYDVQQKDAROb25lMQ8wDQYDVQQLDAZEZXZPcHMxFDASBgNVBAMMC2V4YW1wbGUuY29tMB4XDTE5MTExMTIzMDMwM1oXDTE5MTIxMTIzMDMwM1owYzELMAkGA1UEBhMCWloxDjAMBgNVBAgMBUJsaXNzMQ4wDAYDVQQHDAVMb2NhbDENMAsGA1UECgwETm9uZTEPMA0GA1UECwwGRGV2T3BzMRQwEgYDVQQDDAtleGFtcGxlLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMXG9+hOq+MhhD3p5GEVd+9KRB7UIX+1EjWDYpmaB9MHknWES2ufQbM88HB0akH8VDwhk6cASFBwJ40tk/2kMmlMTtKnfd+47PUwE9LJcnaamn031ekRMkaHTDzB+P8ByAivWe4trvN/lsgfx3M0qhQY2fk/OpxAuCt2L/3QjEuJXfYKr0xAzzLZYhWIhfG1rU4k85PiYWxBJ78LWugN1k0KqVcTWbsV60tfdcPX4sbN7+CsefITYqFjxfOi13B9qRbrxRMZ31TH7KAl3hx3UrWPzhD32acJJlRfnLxZg+Ehls/BwRTYRcCB2sZNlpOEHAxJeJT/idj7XOMr6govzmsCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEAtEJfFFKSDSTgibLgub6Srik6f5Lm8HZdvG8JCo2Z0cqXUugXzmJ7tWSLjvGKqDgTwRa0tb4LQzaKLp5EnREAW91LPP9SvaSus5GVVp5TmacVLBStGuFb45+lIv89B/arp5+bnFgvpLe22fTBrHoqJBMwUJkrL8gBoqdqmDEMihyzoW7uwX9S9ZPZuqBBQ0RBZxpmH/M4WHHwW4ghWyMgcq3QQUe8iIQ8toKi74hcWZUm1ddPg5d+wvXv95VgqW+qVvZsoXA93AaN5P8JoaHOkulsSVaa/3xFUdPx3whaFb7J19Dn1+86m2NVZ6Ko0KtqHbRe1OR+ICR/0K5GRMF3Dg==
-      signInEndpoint: 'http://aef65f2eea4a:4000/wsfed'
-      thumbprints:
-        - 5239be5d3f032df5773310d7fe60861b60470289
-  - name: apple
-    strategy: apple
-    enabled_clients: []
-    is_domain_connection: false
-    options:
-      client_id: ''
-      name: true
-      email: true
-      scope: name email
-  - name: email
-    strategy: email
-    enabled_clients: []
-    is_domain_connection: false
-    options:
-      disable_signup: false
-      name: email
-      email:
-        syntax: liquid
-        from: '{{ application.name }} <root@auth0.com>'
-        subject: 'Welcome to {{ application.name }}'
-        body: ./email.html
-      totp:
-        time_step: 300
-        length: 6
-      brute_force_protection: true
-  - name: etes
-    strategy: oauth2
-    enabled_clients:
-      - Test API (Test Application)
-      - auth0-delegated-admin
-      - auth0-deploy-cli-extension
-      - Auth0 Management API (Test Client)
-      - Test App - Web
-      - Test App - SPA
-      - logs-to-cloudwatch
-      - Auth0 Management API (Test Client) 2
-      - Default App
-      - Test App - SPA (cloned)
-      - API Explorer Application
-    is_domain_connection: false
-    options:
-      scripts:
-        fetchUserProfile: |-
-          function(accessToken, ctx, cb) {
-            // call oauth2 APIwith the accesstoken and create the profile
-            cb(null, profile);
-          }
-      client_id: ''
-      client_secret: ''
-      authorizationURL: ''
-      tokenURL: ''
-      scope: ''
-  - name: facebook
-    strategy: facebook
-    enabled_clients:
-      - Test API (Test Application)
-      - auth0-delegated-admin
-      - auth0-deploy-cli-extension
-      - Auth0 Management API (Test Client)
-      - Test App - Web
-      - logs-to-cloudwatch
-      - Auth0 Management API (Test Client) 2
-      - Default App
-      - Test App - SPA (cloned)
-      - API Explorer Application
-    is_domain_connection: false
-    options:
-      client_id: ''
-      client_secret: ''
-      public_profile: true
-      email: false
-      groups_access_member_info: false
-      publish_to_groups: false
-      user_age_range: false
-      user_birthday: false
-      user_events: false
-      user_friends: false
-      user_gender: false
-      user_hometown: false
-      user_likes: false
-      user_link: false
-      user_location: false
-      user_photos: false
-      user_posts: false
-      user_tagged_places: false
-      user_videos: false
-      ads_management: false
-      ads_read: false
-      business_management: false
-      leads_retrieval: false
-      manage_pages: false
-      pages_manage_cta: false
-      pages_manage_instant_articles: false
-      pages_show_list: false
-      pages_messaging: false
-      pages_messaging_phone_number: false
-      pages_messaging_subscriptions: false
-      publish_pages: false
-      publish_video: false
-      read_audience_network_insights: false
-      read_insights: false
-      read_page_mailboxes: false
-      manage_notifications: false
-      publish_actions: false
-      read_stream: false
-      read_mailbox: false
-      user_groups: false
-      user_managed_groups: false
-      user_status: false
-      allow_context_profile_field: false
-      scope: public_profile
   - name: google-oauth2
     strategy: google-oauth2
     enabled_clients:
-      - Test API (Test Application)
-      - auth0-deploy-cli-extension
-      - Auth0 Management API (Test Client)
-      - Test App - Web
-      - logs-to-cloudwatch
-      - Auth0 Management API (Test Client) 2
       - Default App
-      - Test App - SPA (cloned)
+      - test (Test Application)
       - API Explorer Application
+      - Test App - SPA
     is_domain_connection: false
     options:
       email: true
@@ -613,255 +129,24 @@ connections:
       scope:
         - email
         - profile
-      client_id: ''
-      client_secret: ''
-      allowed_audiences: ''
-      contacts: false
-      blogger: false
-      calendar: false
-      gmail: false
-      google_plus: false
-      orkut: false
-      picasa_web: false
-      tasks: false
-      youtube: false
-      adsense_management: false
-      google_affiliate_network: false
-      analytics: false
-      google_books: false
-      google_cloud_storage: false
-      content_api_for_shopping: false
-      chrome_web_store: false
-      document_list: false
-      google_drive: false
-      google_drive_files: false
-      latitude_best: false
-      latitude_city: false
-      moderator: false
-      sites: false
-      spreadsheets: false
-      url_shortener: false
-      webmaster_tools: false
-      coordinate: false
-      coordinate_readonly: false
-  - name: okta-test
-    strategy: samlp
-    display_name: Okta
-    enabled_clients: []
-    is_domain_connection: false
-    options:
-      signSAMLRequest: true
-      signatureAlgorithm: rsa-sha256
-      digestAlgorithm: sha256
-      fieldsMap: {}
-      idpinitiated:
-        client_id: ''
-        client_protocol: oauth2
-        client_authorizequery: ''
-      signOutEndpoint: ''
-      signInEndpoint: >-
-        https://dev-292868.oktapreview.com/app/auth0dev292868_tomdev_2/exkp5nhnvsWjEEkPy0h7/sso/saml
-      fieldsMapJsonRaw: '{}'
-      signingCert: >-
-        LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURwRENDQW95Z0F3SUJBZ0lHQVcrQ3FCZnlNQTBHQ1NxR1NJYjNEUUVCQ3dVQU1JR1NNUXN3Q1FZRFZRUUdFd0pWVXpFVE1CRUcNCkExVUVDQXdLUTJGc2FXWnZjbTVwWVRFV01CUUdBMVVFQnd3TlUyRnVJRVp5WVc1amFYTmpiekVOTUFzR0ExVUVDZ3dFVDJ0MFlURVUNCk1CSUdBMVVFQ3d3TFUxTlBVSEp2ZG1sa1pYSXhFekFSQmdOVkJBTU1DbVJsZGkweU9USTROamd4SERBYUJna3Foa2lHOXcwQkNRRVcNCkRXbHVabTlBYjJ0MFlTNWpiMjB3SGhjTk1qQXdNVEE0TURBMU5qTXhXaGNOTXpBd01UQTRNREExTnpNeFdqQ0JrakVMTUFrR0ExVUUNCkJoTUNWVk14RXpBUkJnTlZCQWdNQ2tOaGJHbG1iM0p1YVdFeEZqQVVCZ05WQkFjTURWTmhiaUJHY21GdVkybHpZMjh4RFRBTEJnTlYNCkJBb01CRTlyZEdFeEZEQVNCZ05WQkFzTUMxTlRUMUJ5YjNacFpHVnlNUk13RVFZRFZRUUREQXBrWlhZdE1qa3lPRFk0TVJ3d0dnWUoNCktvWklodmNOQVFrQkZnMXBibVp2UUc5cmRHRXVZMjl0TUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUENCmp3eXEvdmdENGdVRUs1Z0NvVnJuVVhMOXVDbGpKK3FHTDRkaG9GOVlJak54cVVDcWhWL3E4NXprSXBwUlRUT1I4WFQwSUtmWTJWWHUNCmpYVDh0QmYzeFl4dEdBRWxTQWx0MFhDekZOWjgrLzJpWlFHdFlJVHBhN0hwWERnSDgxc1FtWFp3VzFJd1I3dGVoZGlKU3JJRTl3THMNCmxhQXlrNjA5T0Z6dFBtVUdVaUtmTFN6NTJsZFJoUmUrUXd2dStBLzZGVDdMelMzczQ0cmNUekp4WGo3SkhEeWJkN0pFbWplejRScnQNCmN3MjNQNHprOUhQd1NkSUU0SVd1MXg4Rktac0NJeTU2Q3huV1BOaHhLc1pNdFFUV0lZMDFBaFNiWmxJWUpmL3gvcmcwRENhYS9TSloNCmRPVXRhQTZwM0VIV1FGQ1F1WGpLbmxPRlJNZis1UWFHeVFFLy93SURBUUFCTUEwR0NTcUdTSWIzRFFFQkN3VUFBNElCQVFBdXJvWEINCjB0cGYxY2lTNlNBaC81L0FyM044SXlmZXR1V1V3enhDY2doOVpqdGlYSk53NlZBRzBTbGlibHM2NGl0NWd1NGptWXB2bnIwN1dJdGoNClg1ajVXalphV3RRWXZJWkdYNGdJTXI2anUxNm1VVlpXc1d4UFFHTEFXTlFIbzNIWEpaUzRNOG1NTTNhMHdmMmltNnBoY09zM0JBSTANCkx1c3dGdEQ3eDJIYk01ZHg5THgvbWxpSnlBampRWXdydVErYk1OZUhoVHllTlFSemxaNThvZm81aHZSOVdzNmlyYzNlNHR3UzlCYzENCmV4WlBQb0dGWFpkVDFaOFFmNXBFL2w1SktHMG9PKzNmTHpLbjNkWHJWeFZid3hwa2VVdVJOVXdTdnR3ZG5vd2VId3dXSFAySW5JWE8NCkZyWGd2UWpub3JMbW1GSmxza2d2U25ieU5jdktBZDM2DQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
-      expires: '2030-01-08T00:57:31.000Z'
-      thumbprints:
-        - 1bbfdc9b8399b01fa3655cf9e0a866a6064a842b
-      debug: true
-      subject:
-        countryName: US
-        stateOrProvinceName: California
-        localityName: San Francisco
-        organizationName: Okta
-        organizationalUnitName: SSOProvider
-        commonName: dev-292868
-        emailAddress: info@okta.com
-      cert: "-----BEGIN CERTIFICATE-----\nMIIDpDCCAoygAwIBAgIGAW+CqBfyMA0GCSqGSIb3DQEBCwUAMIGSMQswCQYDVQQGEwJVUzETMBEG\r\nA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU\r\nMBIGA1UECwwLU1NPUHJvdmlkZXIxEzARBgNVBAMMCmRldi0yOTI4NjgxHDAaBgkqhkiG9w0BCQEW\r\nDWluZm9Ab2t0YS5jb20wHhcNMjAwMTA4MDA1NjMxWhcNMzAwMTA4MDA1NzMxWjCBkjELMAkGA1UE\r\nBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNV\r\nBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRMwEQYDVQQDDApkZXYtMjkyODY4MRwwGgYJ\r\nKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA\r\njwyq/vgD4gUEK5gCoVrnUXL9uCljJ+qGL4dhoF9YIjNxqUCqhV/q85zkIppRTTOR8XT0IKfY2VXu\r\njXT8tBf3xYxtGAElSAlt0XCzFNZ8+/2iZQGtYITpa7HpXDgH81sQmXZwW1IwR7tehdiJSrIE9wLs\r\nlaAyk609OFztPmUGUiKfLSz52ldRhRe+Qwvu+A/6FT7LzS3s44rcTzJxXj7JHDybd7JEmjez4Rrt\r\ncw23P4zk9HPwSdIE4IWu1x8FKZsCIy56CxnWPNhxKsZMtQTWIY01AhSbZlIYJf/x/rg0DCaa/SJZ\r\ndOUtaA6p3EHWQFCQuXjKnlOFRMf+5QaGyQE//wIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQAuroXB\r\n0tpf1ciS6SAh/5/Ar3N8IyfetuWUwzxCcgh9ZjtiXJNw6VAG0Slibls64it5gu4jmYpvnr07WItj\r\nX5j5WjZaWtQYvIZGX4gIMr6ju16mUVZWsWxPQGLAWNQHo3HXJZS4M8mMM3a0wf2im6phcOs3BAI0\r\nLuswFtD7x2HbM5dx9Lx/mliJyAjjQYwruQ+bMNeHhTyeNQRzlZ58ofo5hvR9Ws6irc3e4twS9Bc1\r\nexZPPoGFXZdT1Z8Qf5pE/l5JKG0oO+3fLzKn3dXrVxVbwxpkeUuRNUwSvtwdnoweHwwWHP2InIXO\r\nFrXgvQjnorLmmFJlskgvSnbyNcvKAd36\r\n-----END CERTIFICATE-----\n"
-  - name: saml-test
-    strategy: samlp
-    enabled_clients:
-      - Test API (Test Application)
-      - auth0-deploy-cli-extension
-      - Auth0 Management API (Test Client)
-      - logs-to-cloudwatch
-      - Auth0 Management API (Test Client) 2
-      - Test App - SPA (cloned)
-      - API Explorer Application
-    is_domain_connection: false
-    options:
-      domain_aliases: []
-      tenant_domain: null
-      signInEndpoint: 'https://tom-saml.au.auth0.com/samlp/MAOFiJGH0wvvKEddTxNR5Emta0JUf8OJ'
-      signOutEndpoint: 'https://tom-saml.au.auth0.com/samlp/MAOFiJGH0wvvKEddTxNR5Emta0JUf8OJ'
-      protocolBinding: ''
-      user_id_attribute: ''
-      debug: false
-      signSAMLRequest: true
-      signatureAlgorithm: rsa-sha256
-      digestAlgorithm: sha256
-      fieldsMapJsonRaw: '{}'
-      fieldsMap: {}
-      idpinitiated:
-        client_id: ''
-        client_protocol: oauth2
-        client_authorizequery: ''
-      signingCert: >-
-        LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tDQpNSUlEQlRDQ0FlMmdBd0lCQWdJSlBPaVIrMUE2aHVaYU1BMEdDU3FHU0liM0RRRUJDd1VBTUNBeEhqQWNCZ05WDQpCQU1URlhSdmJTMXpZVzFzTG1GMUxtRjFkR2d3TG1OdmJUQWVGdzB4T1RFd01qTXdNalUxTURWYUZ3MHpNekEzDQpNREV3TWpVMU1EVmFNQ0F4SGpBY0JnTlZCQU1URlhSdmJTMXpZVzFzTG1GMUxtRjFkR2d3TG1OdmJUQ0NBU0l3DQpEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBSzUzUGtnMjVSVnBkZENNUW9ZVzI2ZTVRbTJaDQpUaDU5WVQvdml1cXZEUyt1eXFGRDVFTEhMYWFVbE9pak1YaDMyZGFhb1dRdXJBbGE3aG5YZFowcjZyZjdiTnlJDQpIQmlVNTVJWldINUFTVWpkUjZ1YkYwZjVuVkxta0V6Q01zOHhGR2prWlFidThSRWExeUxWWFA3WmNSN2szbXpSDQo2Qy81TzJENHJoMFRwU3F5dlZ4VnpTcTU0MU93eXFSd2xkL1NaSGlCZTlLTGxnRDQyeFg4d3VlTzRYMEU0R253DQpjaFZzRmpYMEo0TFRUZ3FxNkRSWCtzcW9xY0dRb25kVnUxL3gzTnEwcFo3Wlp3aWM3ZDJrTXR4V3lPYld2S3lXDQpwb3dIcjdHS1NaeDdLV3hIRDBrRmRxVlcrSzBhZGNMQ05BdlIzNHQ1ZmNSdWh5UUQ5UzBqdm1iaEZnMENBd0VBDQpBYU5DTUVBd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBZEJnTlZIUTRFRmdRVThZNkFueCtrZW5Bdlp1cVpORVhKDQpMNGR0SjVJd0RnWURWUjBQQVFIL0JBUURBZ0tFTUEwR0NTcUdTSWIzRFFFQkN3VUFBNElCQVFDSkFaUjduU2hoDQpXY2UyeVhWbkF4dm5HZE1Eb2tHSGl1ZVZPRVNJWWVrbWEyQ25nbG0vYnkvL05nRDVweUdLK09uSnJWcVdzUk9HDQpMcDMrM2d3UThwaXdPQ0pXRXZoNzV0bWpGazZTSjBMcFhiWmJCWHhUY0R2RWg3bjZiN3ArMHR2YUlDdGlmdjZmDQpMeTNNMnZqMGtrTkU3QStRdGxzbG1pbnNVU0JsR01Ld2dLKzRXMzlqa3VKYU1Ua3dmTjkwMzF6Y1o0b3VueG9BDQpUTVRwbDNwc2JEbS85WWRLeG8yOXRqQllSOG5QVllYOGxDeXBkV0szczZlclNCdVgyMFhBUGl6d0p5THVvR1JhDQo2MVdTYmpJK3Z2S0RZdXZPQkZCV2RCY0hvMlRYeE9YYUI1QjNrUWdNbWFPcDhVVU9WR0dyV3c1VEo5SVVNaVpVDQpieHJjcHVLRk1MaGYNCi0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0NCg==
-      expires: '2033-07-01T02:55:05.000Z'
-      thumbprints:
-        - 920995e0587c6aa32978398913a9516e33cd11d3
-      subject:
-        commonName: tom-saml.au.auth0.com
-      cert: "-----BEGIN CERTIFICATE-----\r\nMIIDBTCCAe2gAwIBAgIJPOiR+1A6huZaMA0GCSqGSIb3DQEBCwUAMCAxHjAcBgNV\r\nBAMTFXRvbS1zYW1sLmF1LmF1dGgwLmNvbTAeFw0xOTEwMjMwMjU1MDVaFw0zMzA3\r\nMDEwMjU1MDVaMCAxHjAcBgNVBAMTFXRvbS1zYW1sLmF1LmF1dGgwLmNvbTCCASIw\r\nDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAK53Pkg25RVpddCMQoYW26e5Qm2Z\r\nTh59YT/viuqvDS+uyqFD5ELHLaaUlOijMXh32daaoWQurAla7hnXdZ0r6rf7bNyI\r\nHBiU55IZWH5ASUjdR6ubF0f5nVLmkEzCMs8xFGjkZQbu8REa1yLVXP7ZcR7k3mzR\r\n6C/5O2D4rh0TpSqyvVxVzSq541OwyqRwld/SZHiBe9KLlgD42xX8wueO4X0E4Gnw\r\nchVsFjX0J4LTTgqq6DRX+sqoqcGQondVu1/x3Nq0pZ7ZZwic7d2kMtxWyObWvKyW\r\npowHr7GKSZx7KWxHD0kFdqVW+K0adcLCNAvR34t5fcRuhyQD9S0jvmbhFg0CAwEA\r\nAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQU8Y6Anx+kenAvZuqZNEXJ\r\nL4dtJ5IwDgYDVR0PAQH/BAQDAgKEMA0GCSqGSIb3DQEBCwUAA4IBAQCJAZR7nShh\r\nWce2yXVnAxvnGdMDokGHiueVOESIYekma2Cnglm/by//NgD5pyGK+OnJrVqWsROG\r\nLp3+3gwQ8piwOCJWEvh75tmjFk6SJ0LpXbZbBXxTcDvEh7n6b7p+0tvaICtifv6f\r\nLy3M2vj0kkNE7A+QtlslminsUSBlGMKwgK+4W39jkuJaMTkwfN9031zcZ4ounxoA\r\nTMTpl3psbDm/9YdKxo29tjBYR8nPVYX8lCypdWK3s6erSBuX20XAPizwJyLuoGRa\r\n61WSbjI+vvKDYuvOBFBWdBcHo2TXxOXaB5B3kQgMmaOp8UUOVGGrWw5TJ9IUMiZU\r\nbxrcpuKFMLhf\r\n-----END CERTIFICATE-----\r\n"
 tenant:
-  default_redirection_uri: 'https://test.com'
   enabled_locales:
     - en
     - fr
   flags:
-    enable_custom_domain_in_emails: false
     new_universal_login_experience_enabled: true
     universal_login: true
-    use_scope_descriptions_for_consent: true
     disable_clickjack_protection_headers: false
-    enable_mgmt_api_v1: true
   universal_login:
     colors:
       page_background: '#000000'
       primary: '#0059d6'
 emailProvider: {}
-emailTemplates:
-  - template: reset_email
-    body: ./emailTemplates/reset_email.html
-    enabled: false
-    from: sender@auth0.com
-    includeEmailInRedirect: false
-    resultUrl: ''
-    subject: ''
-    syntax: liquid
-    urlLifetimeInSeconds: 0
-  - template: verify_email
-    body: ./emailTemplates/verify_email.html
-    enabled: false
-    from: sender@auth0.com
-    includeEmailInRedirect: false
-    resultUrl: ''
-    subject: ''
-    syntax: liquid
-    urlLifetimeInSeconds: 0
+emailTemplates: []
 clientGrants:
-  - client_id: API Explorer Application
-    audience: 'https://localhost:3000'
-    scope:
-      - 'read:users'
-  - client_id: API Explorer Application
-    audience: 'https://tom-dev.au.auth0.com/api/v2/'
-    scope:
-      - 'read:client_grants'
-      - 'create:client_grants'
-      - 'delete:client_grants'
-      - 'update:client_grants'
-      - 'read:users'
-      - 'update:users'
-      - 'delete:users'
-      - 'create:users'
-      - 'read:users_app_metadata'
-      - 'update:users_app_metadata'
-      - 'delete:users_app_metadata'
-      - 'create:users_app_metadata'
-      - 'create:user_tickets'
-      - 'read:clients'
-      - 'update:clients'
-      - 'delete:clients'
-      - 'create:clients'
-      - 'read:client_keys'
-      - 'update:client_keys'
-      - 'delete:client_keys'
-      - 'create:client_keys'
-      - 'read:connections'
-      - 'update:connections'
-      - 'delete:connections'
-      - 'create:connections'
-      - 'read:resource_servers'
-      - 'update:resource_servers'
-      - 'delete:resource_servers'
-      - 'create:resource_servers'
-      - 'read:device_credentials'
-      - 'update:device_credentials'
-      - 'delete:device_credentials'
-      - 'create:device_credentials'
-      - 'read:rules'
-      - 'update:rules'
-      - 'delete:rules'
-      - 'create:rules'
-      - 'read:rules_configs'
-      - 'update:rules_configs'
-      - 'delete:rules_configs'
-      - 'read:email_provider'
-      - 'update:email_provider'
-      - 'delete:email_provider'
-      - 'create:email_provider'
-      - 'blacklist:tokens'
-      - 'read:stats'
-      - 'read:tenant_settings'
-      - 'update:tenant_settings'
-      - 'read:logs'
-      - 'read:shields'
-      - 'create:shields'
-      - 'delete:shields'
-      - 'read:anomaly_blocks'
-      - 'delete:anomaly_blocks'
-      - 'update:triggers'
-      - 'read:triggers'
-      - 'read:grants'
-      - 'delete:grants'
-      - 'read:guardian_factors'
-      - 'update:guardian_factors'
-      - 'read:guardian_enrollments'
-      - 'delete:guardian_enrollments'
-      - 'create:guardian_enrollment_tickets'
-      - 'read:user_idp_tokens'
-      - 'create:passwords_checking_job'
-      - 'delete:passwords_checking_job'
-      - 'read:custom_domains'
-      - 'delete:custom_domains'
-      - 'create:custom_domains'
-      - 'read:email_templates'
-      - 'create:email_templates'
-      - 'update:email_templates'
-      - 'read:mfa_policies'
-      - 'update:mfa_policies'
-      - 'read:roles'
-      - 'create:roles'
-      - 'delete:roles'
-      - 'update:roles'
-      - 'read:prompts'
-      - 'update:prompts'
-      - 'read:branding'
-      - 'update:branding'
-  - client_id: Test API (Test Application)
-    audience: 'https://localhost:3000'
+  - client_id: test (Test Application)
+    audience: 'https://test'
     scope: []
-  - client_id: auth0-delegated-admin
-    audience: 'https://tom-dev.au.auth0.com/api/v2/'
-    scope:
-      - 'read:clients'
-      - 'delete:clients'
-      - 'read:connections'
-      - 'read:users'
-      - 'update:users'
-      - 'delete:users'
-      - 'create:users'
-      - 'read:logs'
-      - 'read:device_credentials'
-      - 'update:device_credentials'
-      - 'delete:device_credentials'
-      - 'delete:guardian_enrollments'
-  - client_id: logs-to-cloudwatch
-    audience: 'https://tom-dev.au.auth0.com/api/v2/'
-    scope:
-      - 'read:logs'
-      - 'delete:clients'
 guardianFactors:
   - name: duo
     enabled: false
@@ -872,19 +157,9 @@ guardianFactors:
   - name: push-notification
     enabled: false
   - name: sms
-    enabled: false
+    enabled: true
 guardianFactorProviders: []
 guardianFactorTemplates: []
-roles:
-  - name: Delegated Admin - Administrator
-    description: >-
-      Grants all the rights of Delegated Admin - User, plus the ability to see
-      all logs in the tenant and configure Hooks.
-    permissions: []
-  - name: Test role
-    description: A test role
-    permissions:
-      - permission_name: 'read:users'
-        resource_server_identifier: 'https://localhost:3000'
+roles: []
 branding: {}
 prompts: {}

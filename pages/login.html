@@ -17,21 +17,7 @@
   <script src="https://cdn.auth0.com/js/es5-shim.min.js"></script>
   <![endif]-->
 
-  <script src="https://cdn.auth0.com/js/lock/11.20/lock.min.js"></script>
-    <script>
-     const legacyElementSelector = '#legacyLogin';
-const passwordElementSelector = '.auth0-lock-alternative';
-let passwordResetLink;
-let legacyLoginLink;
-const triggerFunction = (event) => {
-  passwordResetLink = event.relatedNode.querySelector(passwordElementSelector);
-  legacyLoginLink = event.relatedNode.querySelector(legacyElementSelector);
-  if (passwordResetLink && !legacyLoginLink){
-    passwordResetLink.insertAdjacentHTML("afterend", '<p id="legacyLogin" class="auth0-lock-alternative "><a href="http://google.com">Click here for the Legacy Login</a></p>');
-  }
-}
-document.addEventListener("DOMNodeInserted", triggerFunction, false);  
-  </script>
+  <script src="https://cdn.auth0.com/js/lock/11.21/lock.min.js"></script>
   <script>
     // Decode utf8 characters properly
     var config = JSON.parse(decodeURIComponent(escape(window.atob('@@config@@'))));
@@ -39,10 +25,10 @@ document.addEventListener("DOMNodeInserted", triggerFunction, false);
     var connection = config.connection;
     var prompt = config.prompt;
     var languageDictionary;
-    var language = "fr";
+    var language = config.extraParams.ui_locales;
 
     if (config.dict && config.dict.signin && config.dict.signin.title) {
-      languageDictionary = { title: config.dict.signin.title};
+      languageDictionary = { title: config.dict.signin.title, forgotPasswordAction: 'Did you forget your password?' };
     } else if (typeof config.dict === 'string') {
       language = config.dict;
     }
