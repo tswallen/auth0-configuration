@@ -135,10 +135,6 @@ tenant:
       primary: '#0059d6'
 emailProvider: {}
 emailTemplates: []
-clientGrants:
-  - client_id: test (Test Application)
-    audience: 'https://test'
-    scope: []
 guardianFactors:
   - name: duo
     enabled: false
